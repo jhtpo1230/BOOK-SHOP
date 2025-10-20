@@ -1,21 +1,10 @@
-const express = require('express')
+const express = require('express');
+const { allBooks, bookDetail } = require('../controller/bookController');
 const router = express.Router();
 
 router.use(express.json());
 
-// 전체 도서 조회
-router.get('/', (req, res) => {
-    res.json('전체 도서 조회');
-});
-
-// 개별 도서 조회
-router.get('/:id',  (req, res) => {
-    res.json('개별 도서 조회');
-});
-
-// 카테고리별 도서 목록 조회
-router.get('/',  (req, res) => {
-    res.json('카테고리별 도서 목록 조회');
-});
+router.get('/', allBooks); // (카테고리별) 전체 도서 조회
+router.get('/:id', bookDetail); // 개별 도서 조회
 
 module.exports = router
