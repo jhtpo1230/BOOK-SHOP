@@ -46,6 +46,7 @@ const login = (req, res) => {
             // => 디비 비밀번호 비교
             if (loginUser && loginUser.password == hashPassword) {
                 const token = jwt.sign({
+                    id : loginUser.id,
                     email: loginUser.email
                 }, process.env.PRIVATE_KEY, {
                     expiresIn: '5m',

@@ -35,9 +35,9 @@ const order = async (req, res) => {
 
     // items를 가지고, 장바구니에서 book_id, quantity를 조회
     sql = `SELECT book_id, quantity FROM cartItems WHERE id IN (?);`
-    let [orderItems, fields] = await conn.query(sql, [items]);
+    let [orderItems, fields] = await conn.query(sql, [items]); 
 
-    //orderBook 테이블 삽입
+    //orderedBook 테이블 삽입
     sql = `INSERT INTO orderedBook (order_id, book_id, quantity) VALUES ?`;
     values = []; // items = 배열 -> 요소를 하나씩 꺼내서(foreach)
     orderItems.forEach((item) => { // order_id와 함께 orderItems 안에 book_id, quantity를 values에 추가
