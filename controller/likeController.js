@@ -1,8 +1,7 @@
+const ensureAuthorization = require('../auth')
 const jwt = require('jsonwebtoken')
 const conn = require('../mariadb');
 const { StatusCodes } = require('http-status-codes');
-const dotenv = require('dotenv');
-dotenv.config();
 
 const addLike = (req, res) => {
     const book_id = req.params.id;
@@ -59,22 +58,6 @@ const removeLike = (req, res) => {
             })
     }
 };
-
-function ensureAuthorization(req) {
-    try {
-        let receivedJwt = req.headers["authorization"];
-        console.log(receivedJwt)
-
-        let decodedJWT = jwt.verify(receivedJwt, process.env.PRIVATE_kEY);
-        console.log(decodedJWT);
-
-        return decodedJWT;
-    } catch (err) {
-        console.log(err.name + " : " + err.message);
-
-        return err;
-    }
-}
 
 module.exports = {
     addLike, removeLike
