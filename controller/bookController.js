@@ -34,8 +34,14 @@ const allBooks = (req, res) => {
                 console.log(err);
                 return res.status(StatusCodes.BAD_REQUEST).end();
             }
-            if (results.length)
+            if (results.length) {
+                results.map(function(result) {
+                    result.pubDate = result.pub_date;
+                    delete result.pub_date;
+                });
+                
                 allBooksRes.books = results;
+            }
             else
                 return res.status(StatusCodes.NOT_FOUND).end();
         })
